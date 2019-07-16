@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--组件扫描-->
+    <context:component-scan base-package="com.itheima.ssm.service"/>
+
+    <!--配置配置Spring的声明式事务管理  (注解开发)-->
+    <!--配置平台事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+     </bean>
+
+    <!--加载注解驱动-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--
+       支持AOP的注解支持，AOP底层使用代理技术
+       JDK动态代理，要求必须有接口
+       cglib代理，生成子类对象，proxy-target-class="true" 默认使用cglib的方式
+   -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+</beans>
