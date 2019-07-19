@@ -1,1 +1,5 @@
-target
+/itheima_ssm/itheima_ssm_dao/target
+/itheima_ssm/itheima_ssm_domain/target
+/itheima_ssm/itheima_ssm_service/target
+/itheima_ssm/itheima_ssm_utils/target
+/itheima_ssm/itheima_ssm_web/target
