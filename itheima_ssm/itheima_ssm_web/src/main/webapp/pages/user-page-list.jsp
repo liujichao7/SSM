@@ -251,7 +251,7 @@
                                             onclick="location.href='${pageContext.request.contextPath}/user/findById.do?id=${user.id}'"
                                         >详情</button>
                                         <button type="button" class="btn bg-olive btn-xs"
-                                                onclick="location.href='${pageContext.request.contextPath}/pages/xxx.jsp'"
+                                                onclick="location.href='${pageContext.request.contextPath}/user/findUserAndOtherRoleById.do?id=${user.id}'"
                                         >添加角色</button>
                                     </td>
                                 </tr>

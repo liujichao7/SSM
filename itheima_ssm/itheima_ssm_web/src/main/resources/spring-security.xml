@@ -7,12 +7,19 @@
     http://www.springframework.org/schema/security
     http://www.springframework.org/schema/security/spring-security.xsd">
 
+
+
+    <!--开启注解使用-->
+    <!-- 三种方式: 1. jsr250注解方式 , 2. @secured注解方式 , 3. 表达式的注解方式-->
+    <security:global-method-security jsr250-annotations="enabled" secured-annotations="enabled" pre-post-annotations="enabled" />
+
     <!--配置不过滤的资源-->
     <security:http pattern="/login.jsp" security="none"/>  <!--登录页面-->
     <security:http pattern="/failer.jsp" security="none"/>  <!--失败页面-->
     <security:http pattern="/css/**" security="none"/>       <!--静态资源-->
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
+
 
     <!--
         配置具体规则
@@ -55,5 +62,6 @@
 
     <!-- 配置加密类 -->
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-
+    <!--配置支持页面表达式的应用-->
+    <bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"></bean>
 </beans>

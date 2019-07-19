@@ -1,4 +1,4 @@
-package com.itheima.ssm.contriller;
+package com.itheima.ssm.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.itheima.ssm.domain.Orders;

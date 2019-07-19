@@ -16,7 +16,7 @@
            ">
 
     <!--组件扫描-->
-    <context:component-scan base-package="com.itheima.ssm.contriller"/>
+    <context:component-scan base-package="com.itheima.ssm.controller"/>
 
     <!--视图资源解析器-->
     <bean id="resourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -31,7 +31,11 @@
     <!--释放静态资源-->
     <mvc:default-servlet-handler/>
 
-    <!--声明转换器-->
+    <!--
+        加载aop注解支持
+            权限控制的三种注解方式的应用
+     -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
 
 

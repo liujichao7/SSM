@@ -166,12 +166,12 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                角色管理 <small>全部角色</small>
+                日志管理 <small>全部日志</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/index.jsp"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/role/findAll.do?page=1&pageSize=4">角色管理</a></li>
-                <li class="active">全部用户</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/sysLog/findAll.do?page=1&pageSize=4">日志管理</a></li>
+                <li class="active">全部日志</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -195,7 +195,7 @@
                             <div class="form-group form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="新建"
-                                            onclick="location.href='${pageContext.request.contextPath}/pages/role-add.jsp'">
+                                            onclick="location.href='${pageContext.request.contextPath}/pages/user-add.jsp'">
                                         <i class="fa fa-file-o"></i> 新建
                                     </button>
                                     <button type="button" class="btn btn-default" title="删除">
@@ -230,26 +230,25 @@
                                     <input id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
                                 <th class="sorting_asc">ID</th>
-                                <th class="sorting_desc">角色名</th>
-                                <th class="sorting_asc sorting_asc_disabled">描述</th>
-                                <th class="text-center">操作</th>
+                                <th class="sorting">访问时间</th>
+                                <th class="sorting">访问用户</th>
+                                <th class="sorting">访问IP</th>
+                                <th class="sorting">资源URL</th>
+                                <th class="sorting">执行时间</th>
+                                <th class="sorting">访问方法</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${pageInfo.list}" var="role" >
+                            <c:forEach items="${pageInfo.list}" var="sysLog" >
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
-                                    <td>${role.id}</td>
-                                    <td>${role.roleName}</td>
-                                    <td>${role.roleDesc}</td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn bg-olive btn-xs"
-                                            onclick="location.href='${pageContext.request.contextPath}/role/findById.do?id=${role.id}'"
-                                        >详情</button>
-                                        <button type="button" class="btn bg-olive btn-xs"
-                                                onclick="location.href='${pageContext.request.contextPath}/role/findRoleAndOtherPermissionById.do?id=${role.id}'"
-                                        >添加权限</button>
-                                    </td>
+                                    <td>${sysLog.id}</td>
+                                    <td>${sysLog.visitTimeStr}</td>
+                                    <td>${sysLog.username}</td>
+                                    <td>${sysLog.ip}</td>
+                                    <td>${sysLog.url}</td>
+                                    <td>${sysLog.executionTime}毫秒</td>
+                                    <td>${sysLog.method}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -348,10 +347,10 @@
                             <%--当页面在第一页时,隐藏首页和上一页--%>
                             <c:if test="${not pageInfo.isFirstPage}">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/role/findAll.do?page=${pageInfo.firstPage}&pageSize=${pageInfo.pageSize}" aria-label="Previous">首页</a>
+                                    <a href="${pageContext.request.contextPath}/sysLog/findAll.do?page=${pageInfo.firstPage}&pageSize=${pageInfo.pageSize}" aria-label="Previous">首页</a>
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/role/findAll.do?page=${pageInfo.prePage}&pageSize=${pageInfo.pageSize}">上一页</a>
+                                    <a href="${pageContext.request.contextPath}/sysLog/findAll.do?page=${pageInfo.prePage}&pageSize=${pageInfo.pageSize}">上一页</a>
                                 </li>
                             </c:if>
 
@@ -360,16 +359,16 @@
                                     <li class="curPage"><a href="javascript:void(0);">${pageNum}</a></li>
                                 </c:if>
                                 <c:if test="${pageInfo.pageNum != pageNum}">
-                                    <li><a href="${pageContext.request.contextPath}/role/findAll.do?page=${pageNum}&pageSize=${pageInfo.pageSize}">${pageNum}</a> </li>
+                                    <li><a href="${pageContext.request.contextPath}/sysLog/findAll.do?page=${pageNum}&pageSize=${pageInfo.pageSize}">${pageNum}</a> </li>
                                 </c:if>
                             </c:forEach>
                             <%--当页面在最后一页时,隐藏下一页和尾页--%>
                             <c:if test="${not pageInfo.isLastPage}">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/role/findAll.do?page=${pageInfo.nextPage}&pageSize=${pageInfo.pageSize}">下一页</a>
+                                    <a href="${pageContext.request.contextPath}/sysLog/findAll.do?page=${pageInfo.nextPage}&pageSize=${pageInfo.pageSize}">下一页</a>
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/role/findAll.do?page=${pageInfo.lastPage}&pageSize=${pageInfo.pageSize}" aria-label="Next"  >尾页</a>
+                                    <a href="${pageContext.request.contextPath}/sysLog/findAll.do?page=${pageInfo.lastPage}&pageSize=${pageInfo.pageSize}" aria-label="Next"  >尾页</a>
                                 </li>
                             </c:if>
                         </ul>
@@ -494,7 +493,7 @@
         var pageSize = $("#changePageSize").val();
 
         //向服务器发送请求，改变每页显示条数
-        location.href = "${pageContext.request.contextPath}/role/findAll.do?page=1&pageSize="
+        location.href = "${pageContext.request.contextPath}/sysLog/findAll.do?page=1&pageSize="
             + pageSize;
     }
     $(document).ready(function() {
