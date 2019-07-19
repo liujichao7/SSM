@@ -52,7 +52,7 @@ public class IUserServiceImpl implements IUserService {
         List<SimpleGrantedAuthority> list = new ArrayList<>();
         //将权限名赋给该泛型 <查询出的权限集合可通过遍历来赋值>
         for (Role role : roles) {
-            list.add(new SimpleGrantedAuthority(role.getRoleName()));
+            list.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName()));
         }
         return list;
     }
@@ -64,7 +64,7 @@ public class IUserServiceImpl implements IUserService {
      * @param pageSize
      */
     @Override
-    public List<UserInfo> findALL(Integer page, Integer pageSize) {
+    public List<UserInfo> findALL(Integer page, Integer pageSize) throws Exception {
         PageHelper.startPage(page,pageSize);
         return  iUserDao.findAll();
     }
@@ -86,7 +86,29 @@ public class IUserServiceImpl implements IUserService {
      * @return
      */
     @Override
-    public UserInfo findById(String id) {
+    public UserInfo findById(String id) throws Exception {
         return iUserDao.findById(id);
+    }
+
+    /**
+     * 根据userID查询所不具有的角色信息
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Role> findOtherRoleById(String id) throws Exception {
+        return iUserDao.findOtherRoleById(id);
+    }
+
+    /**
+     * 添加角色到用户
+     * @param userId
+     * @param roleIds
+     */
+    @Override
+    public void addRoleToUser(String userId, String[] roleIds) throws Exception {
+        for (String roleId : roleIds) {
+            iUserDao.addRoleToUser(userId,roleId);
+        }
     }
 }

@@ -161,6 +161,7 @@
             <artifactId>spring-security-core</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
+        <!--页面端权限控制-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
@@ -172,7 +173,7 @@
             <artifactId>ojdbc14</artifactId>
             <version>${oracle.version}</version>
         </dependency>
-
+        <!--方法级别权限控制 - jsr250注解方式-->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>jsr250-api</artifactId>
